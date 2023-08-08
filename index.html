@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDN DOI Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #output {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>IDN DOI Generator</h2>
+        <button onclick="generateDOI()">Generiši</button>
+        <button onclick="copyToClipboard()">Kopiraj</button>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        function generateDOI() {
+            const prefix = "10.59954/";
+            const suffix = generateSuffix();
+            document.getElementById('output').textContent = prefix + suffix;
+        }
+
+        function generateSuffix() {
+            const char1 = String.fromCharCode(getRandomInt(65, 90));
+            const char2 = String.fromCharCode(getRandomInt(65, 90));
+            const char3 = String.fromCharCode(getRandomInt(65, 90));
+            const char4 = String.fromCharCode(getRandomInt(65, 90));
+            const number = getRandomInt(1000, 9999);
+            return char1 + char2 + char3 + char4 + number;
+        }
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function copyToClipboard() {
+            const text = document.getElementById('output').textContent;
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }
+    </script>
+</body>
+</html>
