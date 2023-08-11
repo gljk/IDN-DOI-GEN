@@ -43,6 +43,7 @@
         <h2>IDN DOI Generator</h2>
         <button onclick="generateDOI()">Generiši</button>
         <button onclick="copyToClipboard()">Kopiraj</button>
+        <button onclick="copyDOILink()">Kopiraj DOI link</button>
         <div id="output"></div>
     </div>
 
@@ -77,6 +78,15 @@
             document.execCommand('copy');
             document.body.removeChild(textarea);
         }
+        function copyDOILink() {
+            const text = "https://doi.org/" + document.getElementById('output').textContent;
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }   
     </script>
 </body>
 </html>
